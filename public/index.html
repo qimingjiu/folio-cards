@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Folio 项目卡片工坊：写下项目亮点，挑选主题，导出漂亮的高清分享图。内容保存在你的浏览器。">
+  <meta name="theme-color" content="#f6f5f1">
+  <title>Folio · 项目卡片工坊</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#editor">跳至编辑区</a>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Folio 首页"><span class="brand-mark" aria-hidden="true">f.</span><strong>Folio<span>项目卡片工坊</span></strong></a>
+    <div class="header-right"><span class="local-indicator"><i></i>灵感，留在本地</span><a id="author-link" href="https://github.com/qimingjiu" target="_blank" rel="noopener noreferrer">by qimingjiu ↗</a><a id="sponsor-link" class="sponsor" hidden target="_blank" rel="noopener noreferrer">支持作者 ♡</a></div>
+  </header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">A SMALL STUDIO FOR BIG IDEAS</p><h1>把你的项目，<em>漂亮地分享。</em></h1><p class="lead">写下亮点，挑选风格。让下一次发布，从一张好卡片开始。</p></div><div class="intro-note" aria-hidden="true"><span>✳</span><p>made with care,<br>shared with the world.</p></div></section>
+    <div class="workspace">
+      <aside class="editor" id="editor" aria-label="编辑卡片">
+        <div class="panel-heading"><h2>卡片内容</h2><span id="save-status" role="status">准备就绪</span></div>
+        <div class="editor-tabs" role="group" aria-label="卡片版式"><button class="active" data-layout="cover" aria-pressed="true">封面</button><button data-layout="features" aria-pressed="false">功能亮点</button><button data-layout="release" aria-pressed="false">发布</button></div>
+        <form id="card-form" autocomplete="off">
+          <label>项目名称 <span>01</span><input name="title" maxlength="40" placeholder="给你的项目一个名字"></label>
+          <label>一句话介绍 <span>02</span><textarea name="tagline" rows="2" maxlength="80" placeholder="它为什么值得被看见？"></textarea></label>
+          <div id="description-fields"><label>项目简介 <span>03</span><textarea name="description" rows="3" maxlength="160" placeholder="用两三句话，说清楚你的作品。"></textarea></label></div>
+          <fieldset id="feature-fields" hidden><legend>三个功能亮点</legend><label>亮点 01<input name="feature0" maxlength="36"></label><label>亮点 02<input name="feature1" maxlength="36"></label><label>亮点 03<input name="feature2" maxlength="36"></label></fieldset>
+          <label>标签 <small>逗号分隔，最多 3 个</small><input name="tags" maxlength="60" placeholder="开源, 效率工具, TypeScript"></label>
+          <div class="field-row"><label>作者<input name="author" maxlength="40" placeholder="你的名字"></label><label>刊号 / 版本<input name="edition" maxlength="24" placeholder="v1.0.0"></label></div>
+          <label>项目地址 <small>展示在卡片底部</small><input name="link" maxlength="120" placeholder="github.com/you/project" inputmode="url"></label>
+          <div id="image-fields"><div class="upload-row"><label class="upload-button" for="image-input">＋ 添加项目截图<input id="image-input" type="file" accept="image/png,image/jpeg,image/webp" class="file-input"></label><button id="remove-image" type="button" class="text-button" hidden>移除</button></div><p class="field-hint">PNG / JPG / WebP · 最多 5 MB，替换右侧装饰</p></div>
+        </form>
+        <div class="draft-actions"><button id="save-draft" class="text-button">↓ 导出草稿</button><label class="text-button" for="draft-input">↑ 导入草稿<input type="file" id="draft-input" accept=".json,application/json" class="file-input"></label><button id="reset" class="text-button muted">重置</button></div>
+      </aside>
+      <section class="studio" aria-label="卡片预览与导出">
+        <div class="studio-toolbar"><div class="format-options" role="group" aria-label="图片尺寸"><button data-format="wide" aria-pressed="true" class="active"><i class="shape wide"></i>横版</button><button data-format="square" aria-pressed="false"><i class="shape square"></i>方形</button><button data-format="portrait" aria-pressed="false"><i class="shape portrait"></i>竖版</button></div><span id="dimensions" class="dimensions">1200 × 675 px</span></div>
+        <div class="artboard"><div class="canvas-wrap"><canvas id="card-canvas" role="img" aria-label="项目分享卡片预览"></canvas></div><p class="artboard-note"><span>✧</span> 你的下一次发布，就从这里开始。</p></div>
+        <div class="studio-bottom"><div class="theme-control"><span class="control-label">选一种气质</span><div class="themes" role="group" aria-label="卡片主题"><button data-theme="paper" class="active" aria-pressed="true"><span class="swatch paper"></span>纸间</button><button data-theme="midnight" aria-pressed="false"><span class="swatch midnight"></span>午夜</button><button data-theme="mint" aria-pressed="false"><span class="swatch mint"></span>薄荷</button></div></div><div class="export-control"><label class="resolution-label" for="resolution">导出清晰度</label><select id="resolution"><option value="1">1× 标准</option><option value="2" selected>2× 高清</option></select><button id="export" class="primary-button">导出 PNG <span>↗</span></button></div></div>
+        <p id="render-warning" class="render-warning" role="status" hidden></p>
+        <div class="below-studio"><span>不需要登录。没有水印。作品属于你。</span><span>PNG · 高清导出</span></div>
+      </section>
+    </div>
+    <footer><span>Folio / 让每个小作品，都有一个漂亮的开始。</span><span>原创制作 · MIT 开源</span></footer>
+  </main>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <dialog id="confirm-dialog"><form method="dialog"><span class="dialog-icon">↺</span><h2 id="confirm-title">替换当前草稿？</h2><p id="confirm-copy">未导出的修改会被替换。你可以先取消并导出草稿。</p><div><button value="cancel">保留当前</button><button value="confirm" class="primary-button">确认替换</button></div></form></dialog>
+  <noscript>Folio 需要开启 JavaScript 才能编辑并导出图片。</noscript>
+</body>
+</html>

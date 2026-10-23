@@ -1,0 +1,15 @@
+{
+  "name": "folio-cards",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A local-first project card studio. TypeScript, Canvas, zero dependencies.",
+  "license": "MIT",
+  "author": "qimingjiu",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/dev.mjs",
+    "test": "node --test tests/*.test.ts"
+  }
+}
